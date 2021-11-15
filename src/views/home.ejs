@@ -1,0 +1,38 @@
+<%- include('header', {title: 'URL Shortner Utility' }) %>
+
+    <div class="container-sm col-4">
+        <h1>Add Link</h1>
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="longUrl">Enter Your URL</label>
+            <input type="text" id="longUrl" class="form-control" />
+            <label class="form-label" style="color:red;" id="lblError"></label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="button" id="btnsubmit" class="btn btn-primary mb-4" onclick="generateShortURL()">Submit</button>
+    </div>
+
+    <h3>List of Shorted URLs</h3>
+    <table border="1">
+        <tr>
+            <th>Sr.#</th>
+            <th>Long URL</th>
+            <th>Short URL</th>
+            <th>Total Clicks</th>
+        </tr>
+        <%
+            let n = 50, longurl="";
+            for(var i=0; i < links.length; i++) {
+                longurl = links[i].longUrl;
+            %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><a href=<%=longurl%>><%= (longurl.length > n) ? longurl.substr(0, n-1) + '&hellip;' : longurl; %></a></td>
+                <td><a href=<%=links[i].shortUrl%> target="_blank" onclick="reloadSelf(300);"><%= links[i].shortUrl %></a></td>
+                <td><%= links[i].clicks %></td>
+            </tr>
+            <% } %>
+    </table>
+
+    <%- include('footer') %>
