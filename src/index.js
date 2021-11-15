@@ -34,6 +34,9 @@ app.get('/', function(req, res){
 
 });
 
+/**
+ * this get requuest find original url by using short code and redirect to original url. It also +1 to the links counter.
+ */
 app.get('/:short_code', function(req, res){
     const short_code = req.params.short_code;
 
